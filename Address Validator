@@ -1,0 +1,37 @@
+import re
+
+# Regular expression for validating an IP address
+ip_regex = re.compile(
+    r"^("
+    r"(25[0-5]|"  # 250-255
+    r"2[0-4][0-9]|"  # 200-249
+    r"1[0-9][0-9]|"  # 100-199
+    r"[1-9]?[0-9])\.){3}"  # 0-99 (with optional leading digit)
+    r"(25[0-5]|"  # Last octet
+    r"2[0-4][0-9]|"
+    r"1[0-9][0-9]|"
+    r"[1-9]?[0-9])$"
+)
+
+
+def is_valid_ip(ip_address: str) -> bool:
+    """Check whether a given string is a valid IPv4 address."""
+    return bool(ip_regex.match(ip_address))
+
+
+def main():
+    ip_list = [
+        "192.168.0.1",
+        "110.234.52.124",
+        "366.1.2.2"
+    ]
+
+    for ip in ip_list:
+        if is_valid_ip(ip):
+            print(f"{ip} → Valid IP address")
+        else:
+            print(f"{ip} → Invalid IP address")
+
+
+if __name__ == "__main__":
+    main()
